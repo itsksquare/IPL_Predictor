@@ -4,6 +4,10 @@ import pickle
 
 app = Flask(__name__)
 
+linear_regressor = pickle.load(open('api\\Weights\\first-innings-score-lr-model-ann.pkl', 'rb'))
+ridge_regressor = pickle.load(open('api\\Weights\\first-innings-score-lr-model-ridge.pkl', 'rb'))
+ann = pickle.load(open('api\\Weights\\first-innings-score-lr-model-ann.pkl', 'rb'))
+rf_regressor = pickle.load(open('api\\Weights\\first-innings-score-lr-model-rf.pkl', 'rb'))
 
 @app.route('/')
 def home():
@@ -69,11 +73,6 @@ def predict():
         
         data = np.array([temp_array])
 
-        linear_regressor = pickle.load(open('api\\Weights\\first-innings-score-lr-model-ann.pkl', 'rb'))
-        ridge_regressor = pickle.load(open('api\\Weights\\first-innings-score-lr-model-ridge.pkl', 'rb'))
-        ann = pickle.load(open('api\\Weights\\first-innings-score-lr-model-ann.pkl', 'rb'))
-        rf_regressor = pickle.load(open('api\\Weights\\first-innings-score-lr-model-rf.pkl', 'rb'))
-
 
         my_prediction_linear = int(linear_regressor.predict(data)[0])
         my_prediction_ridge = int(ridge_regressor.predict(data)[0])
@@ -93,7 +92,7 @@ def predict():
 
 if __name__ == "__main__":
     import os
-    # from waitress import serve
-    # serve(app, host="0.0.0.0", port=8080)
-    port = int(os.environ.get("PORT", 5000))
-    app.run(host='0.0.0.0', port=port, debug=True)
+    from waitress import serve
+    serve(app, host="0.0.0.0", port=8080)
+    # port = int(os.environ.get("PORT", 5000))
+    # app.run(host='0.0.0.0', port=port, debug=True)
