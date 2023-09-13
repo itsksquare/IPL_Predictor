@@ -4,10 +4,10 @@ import pickle
 
 app = Flask(__name__)
 
-# linear_regressor = pickle.load(open('api\\Weights\\first-innings-score-lr-model-ann.pkl', 'rb'))
-# ridge_regressor = pickle.load(open('api\\Weights\\first-innings-score-lr-model-ridge.pkl', 'rb'))
-# ann = pickle.load(open('api\\Weights\\first-innings-score-lr-model-ann.pkl', 'rb'))
-# rf_regressor = pickle.load(open('api\\Weights\\first-innings-score-lr-model-rf.pkl', 'rb'))
+linear_regressor = pickle.load(open('api\\Weights\\first-innings-score-lr-model-ann.pkl', 'rb'))
+ridge_regressor = pickle.load(open('api\\Weights\\first-innings-score-lr-model-ridge.pkl', 'rb'))
+ann = pickle.load(open('api\\Weights\\first-innings-score-lr-model-ann.pkl', 'rb'))
+rf_regressor = pickle.load(open('api\\Weights\\first-innings-score-lr-model-rf.pkl', 'rb'))
 
 @app.route('/')
 def home():
@@ -74,10 +74,10 @@ def predict():
         data = np.array([temp_array])
 
 
-        my_prediction_linear = 0 # int(linear_regressor.predict(data)[0])
-        my_prediction_ridge =0# int(ridge_regressor.predict(data)[0])
-        my_prediction_ann =0# int(ann.predict(data)[0])
-        my_prediction_rf =0# int(rf_regressor.predict(data)[0])
+        my_prediction_linear = int(linear_regressor.predict(data)[0])
+        my_prediction_ridge = int(ridge_regressor.predict(data)[0])
+        my_prediction_ann = int(ann.predict(data)[0])
+        my_prediction_rf = int(rf_regressor.predict(data)[0])
 
         if my_prediction_linear > 250:
             my_prediction_linear = my_prediction_ridge + 15
