@@ -90,9 +90,9 @@ def predict():
                                lower_limit_rf = my_prediction_rf-10, upper_limit_rf = my_prediction_rf)
 
 
-if __name__ == "__main__":
-    import os
-    # from waitress import serve
-    # serve(app, host="0.0.0.0", port=8080)
-    port = int(os.environ.get("PORT", 5000))
-    app.run(host='0.0.0.0', port=port, debug=True)
+# if __name__ == "__main__":
+#     import os
+#     # from waitress import serve
+#     # serve(app, host="0.0.0.0", port=8080)
+#     port = int(os.environ.get("PORT", 5000))
+#     app.run(host='0.0.0.0', port=port, debug=True)
